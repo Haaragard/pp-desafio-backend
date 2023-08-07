@@ -12,6 +12,9 @@ Table users {
   userable_id integer [ref: > persons.id, ref: > companies.id]
   name varchar
   email varchar
+  email_verified_at timestamp
+  phone varchar
+  phone_verified_at timestamp
   password varchar
   created_at timestamp
   updated_at timestamp
