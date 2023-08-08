@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('persons', function (Blueprint $table) {
             $table->id();
             $table->uuid()->index();
-            $table->string('cpf', 11);
+            $table->string('cpf', 11)->unique();
             $table->timestamps();
         });
     }
