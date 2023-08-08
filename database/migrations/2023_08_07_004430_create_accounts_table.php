@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->uuid()->index();
             $table->foreignIdFor(User::class);
-            $table->unsignedBigInteger('balance');
+            $table->unsignedBigInteger('balance')->default(0);
             $table->timestamps();
         });
     }
