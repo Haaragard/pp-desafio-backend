@@ -23,7 +23,6 @@ Table users {
 table persons {
   id integer [primary key]
   uuid uuid
-  user_id integer [ref: > users.id]
   cpf varchar(11)
   created_at timestamp
   updated_at timestamp
@@ -32,7 +31,6 @@ table persons {
 table companies {
   id integer [primary key]
   uuid uuid
-  user_id integer [ref: > users.id]
   cnpj varchar(14)
   created_at timestamp
   updated_at timestamp
