@@ -12,4 +12,12 @@ abstract class BaseRepository implements BaseRepositoryContract
      */
     public function __construct(protected Model $model)
     { }
+
+    /**
+     * @inheritDoc
+     */
+    public function create(array $attributes = []): Model
+    {
+        return $this->model::create($attributes);
+    }
 }
