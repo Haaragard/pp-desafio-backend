@@ -38,16 +38,16 @@ table companies {
 
 table accounts {
   id integer [primary key]
+  uuid uuid
   user_id integer [ref: > users.id]
   balance integer [note: 'unsigned big integer']
-  future_balance integer
 }
 
 table transactions {
   id integer [primary key]
   uuid uuid
-  payer_id integer [ref: > users.id, note: "user_id, this one pays"]
-  payee_id integer [ref: > users.id, note: "user_id, this one receives"]
+  payer_id integer [ref: > accounts.id, note: "account_id, this one pays"]
+  payee_id integer [ref: > accounts.id, note: "account_id, this one receives"]
   amount integer [note: 'unsigned big integer']
   approved_at timestamp
   reproved_at timestamp
