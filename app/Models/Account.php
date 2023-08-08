@@ -4,11 +4,13 @@ namespace App\Models;
 
 use App\Models\Traits\HasUuids;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Account extends Model
 {
+    use HasFactory;
     use HasUuids;
 
     /**
@@ -31,13 +33,12 @@ class Account extends Model
     ];
 
     /**
-     * Get the account balance.
+     * Get the account balance in float.
      */
-    protected function balance(): Attribute
+    protected function balanceFloat(): Attribute
     {
         return Attribute::make(
-            get: fn (int $value) => ((float) $value) / 100,
-            set: fn (int $value) => (int) ($value * 100),
+            get: fn () => ((float) $this->balance) / 100,
         );
     }
 

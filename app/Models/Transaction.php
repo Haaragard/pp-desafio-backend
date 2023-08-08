@@ -3,10 +3,14 @@
 namespace App\Models;
 
 use App\Models\Traits\HasUuids;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Transaction extends Model
 {
+    use HasFactory;
     use HasUuids;
 
     /**
@@ -31,4 +35,30 @@ class Transaction extends Model
         'created_at' => 'timestamp',
         'updated_at' => 'timestamp',
     ];
+
+    /**
+     * Get the transation amount.
+     */
+    protected function amountFloat(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => ((float) $this->amount) / 100,
+        );
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function payer(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'payer_id');
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function payee(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'payee_id');
+    }
 }

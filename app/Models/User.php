@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Traits\HasUuids;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -59,5 +60,25 @@ class User extends Authenticatable
     public function userable(): MorphTo
     {
         return $this->morphTo();
+    }
+
+    /**
+     * Get if the user is a person.
+     */
+    protected function isPerson(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => (bool) ($this->userable_type === Person::class)
+        );
+    }
+
+    /**
+     * Get if the user is a company.
+     */
+    protected function isCompany(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => (bool) ($this->userable_type === Company::class)
+        );
     }
 }
