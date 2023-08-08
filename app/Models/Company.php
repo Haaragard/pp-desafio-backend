@@ -7,7 +7,7 @@ use App\Models\Traits\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 
-class Person extends Model implements Userable
+class Company extends Model implements Userable
 {
     use HasUuids;
 
@@ -17,7 +17,7 @@ class Person extends Model implements Userable
      * @var array<int, string>
      */
     protected $fillable = [
-        'cpf',
+        'cnpj',
     ];
 
     /**
@@ -35,7 +35,7 @@ class Person extends Model implements Userable
      */
     public function getCredential(): string
     {
-        return $this->cpf;
+        return $this->cnpj;
     }
 
     /**
