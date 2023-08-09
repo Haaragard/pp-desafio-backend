@@ -23,7 +23,3 @@ Route::prefix('person')->name('.person')->group(function () {
 Route::prefix('company')->name('.company')->group(function () {
     Route::post('/', [CompanyController::class, 'store'])->name('.create');
 });
-
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
