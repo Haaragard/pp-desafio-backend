@@ -9,7 +9,18 @@ class StoreDto extends BaseDto
     /**
      * @var array
      */
-    protected static array $rules = ['cnpj' => ['numeric', 'max:255']];
+    protected static array $rules = [
+        'cnpj' => [
+            'numeric',
+            'digits:14',
+            'unique:companies,cnpj',
+        ],
+    ];
+
+    /**
+     * @var array
+     */
+    protected static array $attributes = ['cnpj'];
 
     /**
      * @param string $cnpj
