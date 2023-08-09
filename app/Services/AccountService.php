@@ -30,4 +30,12 @@ class AccountService implements AccountServiceContract
     {
         return $this->repository->findBy('uuid', $uuid, true);
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function deposit(Account $account, float $amount): bool
+    {
+        return $this->repository->deposit($account, $amount);
+    }
 }

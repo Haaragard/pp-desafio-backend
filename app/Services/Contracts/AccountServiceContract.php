@@ -18,4 +18,11 @@ interface AccountServiceContract
      * @return Account
      */
     public function getByUuid(string $uuid): Account;
+
+    /**
+     * @param Account $account
+     * @param float $amount
+     * @return bool
+     */
+    public function deposit(Account $account, float $amount): bool;
 }
