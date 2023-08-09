@@ -12,4 +12,10 @@ interface AccountServiceContract
      * @return Account
      */
     public function create(User $user): Account;
+
+    /**
+     * @param string $uuid
+     * @return Account
+     */
+    public function getByUuid(string $uuid): Account;
 }

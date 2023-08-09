@@ -22,4 +22,12 @@ class AccountService implements AccountServiceContract
     {
         return $this->repository->createWithUser($user);
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function getByUuid(string $uuid): Account
+    {
+        return $this->repository->findBy('uuid', $uuid, true);
+    }
 }
