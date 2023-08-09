@@ -9,9 +9,11 @@ use Illuminate\Http\Response;
 
 class AccountController extends Controller
 {
-    public function __construct()
-    { }
-
+    /**
+     * @param DepositRequest $request
+     * @param DepositAction $action
+     * @return Response
+     */
     public function deposit(DepositRequest $request, DepositAction $action): Response
     {
         $depositDto = new DepositDto(
