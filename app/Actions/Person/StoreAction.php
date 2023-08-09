@@ -2,7 +2,7 @@
 
 namespace App\Actions\Person;
 
-use App\Actions\Account\StoreAction as AcountStoreAction;
+use App\Actions\Account\StoreAction as AccountStoreAction;
 use App\Actions\Traits\CreateAccountFromUser;
 use App\Actions\Traits\CreateUserFromUserable;
 use App\Actions\User\StoreAction as UserStoreAction;
@@ -20,12 +20,12 @@ class StoreAction
     /**
      * @param PersonServiceContract $service
      * @param UserStoreAction $storeUserAction
-     * @param AcountStoreAction $storeAccountAction
+     * @param AccountStoreAction $storeAccountAction
      */
     public function __construct(
         private PersonServiceContract $service,
         private UserStoreAction $storeUserAction,
-        private AcountStoreAction $storeAccountAction
+        private AccountStoreAction $storeAccountAction
     ) { }
 
     /**
