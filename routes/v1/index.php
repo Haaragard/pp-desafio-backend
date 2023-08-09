@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\PersonController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -17,6 +18,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('person')->name('.person')->group(function () {
     Route::post('/', [PersonController::class, 'store'])->name('.create');
+});
+
+Route::prefix('company')->name('.company')->group(function () {
+    Route::post('/', [CompanyController::class, 'store'])->name('.create');
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
