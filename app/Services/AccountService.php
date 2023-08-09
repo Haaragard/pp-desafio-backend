@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use App\Models\Account;
+use App\Models\User;
 use App\Repositories\Contracts\AccountRepositoryContract;
 use App\Services\Contracts\AccountServiceContract;
 
@@ -12,4 +14,12 @@ class AccountService implements AccountServiceContract
      */
     public function __construct(private AccountRepositoryContract $repository)
     { }
+
+    /**
+     * @inheritDoc
+     */
+    public function create(User $user): Account
+    {
+        return $this->repository->createWithUser($user);
+    }
 }
