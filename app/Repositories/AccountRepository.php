@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Account;
+use App\Models\User;
 use App\Repositories\Contracts\AccountRepositoryContract;
 
 class AccountRepository extends BaseRepository implements AccountRepositoryContract
@@ -13,5 +14,18 @@ class AccountRepository extends BaseRepository implements AccountRepositoryContr
     public function __construct(Account $model)
     {
         parent::__construct($model);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function createWithUser(User $user): Account
+    {
+        /**
+         * @var Account
+         */
+        $account = $user->account()->create();
+
+        return $account;
     }
 }
