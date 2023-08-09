@@ -11,4 +11,14 @@ interface BaseRepositoryContract
      * @return Model
      */
     public function create(array $attributes = []): Model;
+
+    /**
+     * @param string $field
+     * @param string $value
+     * @param bool $orFail
+     * @return Model|null
+     * 
+     * @throws ModelNotFoundException
+     */
+    public function findBy(string $field, string $value, bool $orFail = false): ?Model;
 }
