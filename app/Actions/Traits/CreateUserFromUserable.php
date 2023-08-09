@@ -9,7 +9,10 @@ use App\Models\User;
 
 trait CreateUserFromUserable
 {
-    protected StoreAction $storeUserAction;
+    /**
+     * @var StoreAction
+     */
+    private StoreAction $storeUserAction;
 
     /**
      * @param Userable $userable
