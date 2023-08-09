@@ -2,6 +2,8 @@
 
 namespace App\Actions\Person;
 
+use App\Actions\Account\StoreAction as AcountStoreAction;
+use App\Actions\Traits\CreateAccountFromUser;
 use App\Actions\Traits\CreateUserFromUserable;
 use App\Actions\User\StoreAction as UserStoreAction;
 use App\Dtos\Person\StoreDto;
@@ -13,14 +15,17 @@ use Illuminate\Support\Facades\DB;
 class StoreAction
 {
     use CreateUserFromUserable;
+    use CreateAccountFromUser;
 
     /**
      * @param PersonServiceContract $service
      * @param UserStoreAction $storeUserAction
+     * @param AcountStoreAction $storeAccountAction
      */
     public function __construct(
         private PersonServiceContract $service,
-        protected UserStoreAction $storeUserAction
+        private UserStoreAction $storeUserAction,
+        private AcountStoreAction $storeAccountAction
     ) { }
 
     /**
@@ -31,7 +36,8 @@ class StoreAction
     {
         $person = DB::transaction(function () use (&$dto, &$storeUserDto) {
             $person = $this->createPerson($dto);
-            $this->createUser($person, $storeUserDto);
+            $user = $this->createUser($person, $storeUserDto);
+            $this->createAccount($user);
 
             return $person;
         });
