@@ -23,3 +23,7 @@ Route::prefix('person')->name('.person')->group(function () {
 Route::prefix('company')->name('.company')->group(function () {
     Route::post('/', [CompanyController::class, 'store'])->name('.create');
 });
+
+Route::prefix('account')->name('.account')->group(function () {
+    Route::post('/deposit', [AccountController::class, 'deposit'])->name('.deposit');
+});
