@@ -12,4 +12,11 @@ interface AccountRepositoryContract extends BaseRepositoryContract
      * @return Account
      */
     public function createWithUser(User $user): Account;
+
+    /**
+     * @param Account $account
+     * @param float $amount
+     * @return bool
+     */
+    public function deposit(Account $account, float $amount): bool;
 }

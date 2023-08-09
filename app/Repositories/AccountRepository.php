@@ -28,4 +28,14 @@ class AccountRepository extends BaseRepository implements AccountRepositoryContr
 
         return $account;
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function deposit(Account $account, float $amount): bool
+    {
+        $account->balance += (int) ($amount * 100);
+
+        return $account->save();
+    }
 }
