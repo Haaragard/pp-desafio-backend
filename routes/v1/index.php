@@ -27,6 +27,7 @@ Route::prefix('company')->name('.company')->group(function () {
 
 Route::prefix('account')->name('.account')->middleware('auth:sanctum')->group(function () {
     Route::post('/deposit', [AccountController::class, 'deposit'])->name('.deposit');
+    Route::post('/withdraw', [AccountController::class, 'withdraw'])->name('.withdraw');
 });
 
 Route::prefix('user')->name('.user')->group(function () {
