@@ -3,6 +3,7 @@
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\PersonController;
+use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -32,4 +33,8 @@ Route::prefix('account')->name('.account')->middleware('auth:sanctum')->group(fu
 
 Route::prefix('user')->name('.user')->group(function () {
     Route::post('/login', [UserController::class, 'login'])->name('.login');
+});
+
+Route::prefix('transaction')->name('.transaction')->middleware('auth:sanctum')->group(function () {
+    Route::post('/', [TransactionController::class, 'store'])->name('.create');
 });
