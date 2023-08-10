@@ -3,6 +3,7 @@
 namespace App\Dtos\User;
 
 use App\Dtos\BaseDto;
+use Illuminate\Validation\Rules\Password;
 
 class StoreDto extends BaseDto
 {
@@ -21,11 +22,11 @@ class StoreDto extends BaseDto
             'digits:11',
             'unique:users,phone',
         ],
-        'password' => [
-            'string',
-            'min_digits:8',
-            'max_digits:16',
-        ],
+        'password' => Password::min(8)
+            ->letters()
+            ->mixedCase()
+            ->numbers()
+            ->symbols(),
     ];
 
     /**
