@@ -12,6 +12,7 @@ class DepositDto extends BaseDto
     protected static array $rules = [
         'amount' => [
             'numeric',
+            'min:1',
             'max:100000000',
         ],
     ];
