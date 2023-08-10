@@ -38,4 +38,14 @@ class AccountRepository extends BaseRepository implements AccountRepositoryContr
 
         return $account->save();
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function withdraw(Account $account, float $amount): bool
+    {
+        $account->balance -= (int) ($amount * 100);
+
+        return $account->save();
+    }
 }
