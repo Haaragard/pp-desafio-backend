@@ -1,5 +1,30 @@
 # Desafio Back-end PP
 
+Bem-vindo ao meu teste para Dev. Back-End para **PP**.
+
+---
+## Installation
+
+Tentei facilitar ao máximo a montagem e utilização do teste, segue o breve tutorial:
+
+### Obrigatório ter instalado
+
+- Docker
+
+### Passo-a-passo
+
+1. Executar comando `docker compose up -d`
+
+### Insomnia Collections
+
+### Para testes
+#### Geradores 4-Devs
+- [Gerador de nome](https://www.4devs.com.br/gerador_de_nomes)
+- [Gerador de cpf](https://www.4devs.com.br/gerador_de_cpf)
+- [Gerador de cnpj](https://www.4devs.com.br/gerador_de_cnpj)
+
+---
+
 Primeiramente, obrigado pelo seu interesse em trabalhar na melhor plataforma de pagamentos do mundo!
 Abaixo você encontrará todos as informações necessárias para iniciar o seu teste.
 
@@ -108,7 +133,7 @@ Caso não tenha atingido aceitavelmente o que estamos propondo acima, não iremo
 
 ## O que NÃO será avaliado :warning:
 - Fluxo de cadastro de usuários e lojistas
-- Frontend (só avaliaremos a (API Restful)[https://www.devmedia.com.br/rest-tutorial/28912])
+- Frontend (só avaliaremos a [API Restful](https://www.devmedia.com.br/rest-tutorial/28912))
 - Autenticação
 
 ## O que será um Diferencial
