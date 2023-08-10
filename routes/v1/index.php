@@ -27,3 +27,7 @@ Route::prefix('company')->name('.company')->group(function () {
 Route::prefix('account')->name('.account')->group(function () {
     Route::post('/deposit', [AccountController::class, 'deposit'])->name('.deposit');
 });
+
+Route::prefix('user')->name('.user')->group(function () {
+    Route::post('/login', [UserController::class, 'login'])->name('.login');
+});
