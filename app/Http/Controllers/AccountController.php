@@ -16,10 +16,7 @@ class AccountController extends Controller
      */
     public function deposit(DepositRequest $request, DepositAction $action): Response
     {
-        $depositDto = new DepositDto(
-            $request->validated('account'),
-            $request->validated('amount')
-        );
+        $depositDto = new DepositDto($request->validated('amount'));
 
         $successOnDeposit = $action->execute($depositDto);
 

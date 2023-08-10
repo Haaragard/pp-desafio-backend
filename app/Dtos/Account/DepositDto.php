@@ -10,10 +10,6 @@ class DepositDto extends BaseDto
      * @var array
      */
     protected static array $rules = [
-        'account' => [
-            'uuid',
-            'exists:accounts,uuid',
-        ],
         'amount' => [
             'numeric',
             'max:100000000',
@@ -23,16 +19,11 @@ class DepositDto extends BaseDto
     /**
      * @var array
      */
-    protected static array $attributes = [
-        'account',
-        'amount',
-    ];
+    protected static array $attributes = ['amount'];
 
     /**
      * @param string $cnpj
      */
-    public function __construct(
-        public string $account,
-        public float $amount
-    ) { }
+    public function __construct(public float $amount)
+    { }
 }

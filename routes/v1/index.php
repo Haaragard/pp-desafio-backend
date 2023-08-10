@@ -1,8 +1,9 @@
 <?php
 
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\PersonController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,7 +25,7 @@ Route::prefix('company')->name('.company')->group(function () {
     Route::post('/', [CompanyController::class, 'store'])->name('.create');
 });
 
-Route::prefix('account')->name('.account')->group(function () {
+Route::prefix('account')->name('.account')->middleware('auth:sanctum')->group(function () {
     Route::post('/deposit', [AccountController::class, 'deposit'])->name('.deposit');
 });
 

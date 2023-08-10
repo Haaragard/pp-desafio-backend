@@ -4,7 +4,9 @@ namespace App\Actions\Account;
 
 use App\Dtos\Account\DepositDto;
 use App\Models\Account;
+use App\Models\User;
 use App\Services\Contracts\AccountServiceContract;
+use Illuminate\Support\Facades\Auth;
 
 class DepositAction
 {
@@ -20,17 +22,21 @@ class DepositAction
      */
     public function execute(DepositDto $dto): bool
     {
-        $account = $this->findAccount($dto->account);
+        $account = $this->getAccount();
 
         return $this->service->deposit($account, $dto->amount);
     }
 
     /**
-     * @param string $uuid
      * @return Account
      */
-    private function findAccount(string $uuid): Account
+    private function getAccount(): Account
     {
-        return $this->service->getByUuid($uuid);
+        /**
+         * @var User
+         */
+        $user = Auth::user();
+
+        return $user->account;
     }
 }
