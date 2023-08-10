@@ -14,4 +14,23 @@ interface UserServiceContract
      * @return User
      */
     public function create(Userable $userable, StoreDto $dto): User;
+
+    /**
+     * @param string $email
+     * @return User
+     */
+    public function getByEmail(string $email): User;
+
+    /**
+     * @param User $user
+     * @param string $password
+     * @return bool
+     */
+    public function checkPasswordMatch(User $user, string $password): bool;
+
+    /**
+     * @param User $user
+     * @return string
+     */
+    public function newPersonaAccessToken(User $user): string;
 }
