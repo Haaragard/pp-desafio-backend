@@ -25,4 +25,11 @@ interface AccountServiceContract
      * @return bool
      */
     public function deposit(Account $account, float $amount): bool;
+
+    /**
+     * @param Account $account
+     * @param float $amount
+     * @return bool
+     */
+    public function withdraw(Account $account, float $amount): bool;
 }

@@ -38,4 +38,12 @@ class AccountService implements AccountServiceContract
     {
         return $this->repository->deposit($account, $amount);
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function withdraw(Account $account, float $amount): bool
+    {
+        return $this->repository->withdraw($account, $amount);
+    }
 }
