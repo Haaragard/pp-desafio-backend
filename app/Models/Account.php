@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Models\Contracts\Withdrawer;
 use App\Models\Traits\HasUuids;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Account extends Model
+class Account extends Model implements Withdrawer
 {
     use HasFactory;
     use HasUuids;
@@ -50,4 +51,11 @@ class Account extends Model
         return $this->belongsTo(User::class);
     }
     
+    /**
+     * @inheritDoc
+     */
+    public function hasEnoughBalance(float $amount): bool
+    {
+        return $this->balance >= ($amount * 100);
+    }
 }
