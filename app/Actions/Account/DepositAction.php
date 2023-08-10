@@ -2,14 +2,14 @@
 
 namespace App\Actions\Account;
 
+use App\Actions\Traits\AuthUtilities;
 use App\Dtos\Account\DepositDto;
-use App\Models\Account;
-use App\Models\User;
 use App\Services\Contracts\AccountServiceContract;
-use Illuminate\Support\Facades\Auth;
 
 class DepositAction
 {
+    use AuthUtilities;
+
     /**
      * @param AccountServiceContract $service
      */
@@ -25,18 +25,5 @@ class DepositAction
         $account = $this->getAccount();
 
         return $this->service->deposit($account, $dto->amount);
-    }
-
-    /**
-     * @return Account
-     */
-    private function getAccount(): Account
-    {
-        /**
-         * @var User
-         */
-        $user = Auth::user();
-
-        return $user->account;
     }
 }
