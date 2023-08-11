@@ -14,4 +14,16 @@ interface TransactionRepositoryContract extends BaseRepositoryContract
      * @return Transaction
      */
     public function createTransaction(Account $payer, Account $payee, float $amount): Transaction;
+
+    /**
+     * @param Transaction $transaction
+     * @return bool
+     */
+    public function approve(Transaction $transaction): bool;
+
+    /**
+     * @param Transaction $transaction
+     * @return bool
+     */
+    public function reprove(Transaction $transaction): bool;
 }

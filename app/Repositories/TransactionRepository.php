@@ -36,4 +36,24 @@ class TransactionRepository extends BaseRepository implements TransactionReposit
 
         return $transaction;
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function approve(Transaction $transaction): bool
+    {
+        $transaction->approved_at = now();
+        
+        return $transaction->save();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function reprove(Transaction $transaction): bool
+    {
+        $transaction->reproved_at = now();
+        
+        return $transaction->save();
+    }
 }
