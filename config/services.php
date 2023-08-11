@@ -31,4 +31,12 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'mocky' => [
+        'domain' => env('MOCKY_DOMAIN', 'https://run.mocky.io/'),
+        'uri' => [
+            'transaction' => [
+                'status' => 'v3/4e55fdf3-fd5d-41c3-945f-ffa02d28d285',
+            ],
+        ],
+    ],
 ];
