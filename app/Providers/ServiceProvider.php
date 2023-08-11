@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Services\{
     AccountService,
     CompanyService,
+    MockyService,
     PersonService,
     TransactionService,
     UserService
@@ -12,6 +13,7 @@ use App\Services\{
 use App\Services\Contracts\{
     AccountServiceContract,
     CompanyServiceContract,
+    MockyServiceContract,
     PersonServiceContract,
     TransactionServiceContract,
     UserServiceContract
@@ -50,6 +52,11 @@ class ServiceProvider extends BaseProvider implements DeferrableProvider
             TransactionServiceContract::class,
             TransactionService::class
         );
+
+        $this->app->bind(
+            MockyServiceContract::class,
+            MockyService::class
+        );
     }
 
     /**
@@ -65,6 +72,7 @@ class ServiceProvider extends BaseProvider implements DeferrableProvider
             CompanyServiceContract::class,
             AccountServiceContract::class,
             TransactionServiceContract::class,
+            MockyServiceContract::class,
         ];
     }
 }
