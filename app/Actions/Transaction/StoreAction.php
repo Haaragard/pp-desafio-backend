@@ -6,6 +6,7 @@ use App\Actions\Account\WithdrawAction;
 use App\Actions\Traits\AuthUtilities;
 use App\Dtos\Account\WithdrawDto;
 use App\Dtos\Transaction\StoreDto;
+use App\Jobs\ApproveTransactionJob;
 use App\Models\Account;
 use App\Models\Transaction;
 use App\Services\Contracts\AccountServiceContract;
@@ -41,10 +42,10 @@ class StoreAction
             $this->withdraw($dto);
             $transaction = $this->createTransaction($account, $targetAccount, $dto->amount);
 
-            // TODO: Send job
-
             return $transaction;
         });
+
+        ApproveTransactionJob::dispatch($transaction);
 
         return $transaction;
     }
