@@ -8,8 +8,8 @@
 
 ## Routes
 
-- [Deposit](###Deposit)
-- [Withdraw](###Withdraw)
+- [Deposit](#deposit)
+- [Withdraw](#withdraw)
 
 ---
 
