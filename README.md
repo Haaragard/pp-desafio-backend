@@ -12,7 +12,23 @@ Tentei facilitar ao máximo a montagem e utilização do teste, segue o breve tu
 
 ### Passo-a-passo
 
-1. Executar comando `docker compose up -d`
+1. Acessar pasta do projeto no terminal
+2. Executar comando `cp .env.example .env` para criar arquivo **.env**
+3. Executar comando `docker compose up -d` para buildar e rodar containeres
+4. Executar comando `docker exec -u sail -it app bash` para acessar o container **app** como usuário **sail**
+5. Executar comando `php artisan key:generate` para gerar chave
+6. Executar comando `php artisan migrate` para aplicar migrations do banco de dados
+
+### Testes
+
+1. Executar comando `docker exec -u sail -it app bash` para acessar o container **app** como usuário **sail**
+2. Executar comando `php artisan test` para rodar testes
+
+Ou...
+
+```bash
+docker run -it --rm -v $(pwd):/project -w /project jakzal/phpqa phpmd app text cleancode,codesize,controversial,design,naming,unusedcode
+```
 
 ---
 
