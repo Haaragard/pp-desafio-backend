@@ -51,7 +51,7 @@ class Transaction extends Model
      */
     public function payer(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'payer_id');
+        return $this->belongsTo(Account::class, 'payer_id');
     }
 
     /**
@@ -59,6 +59,6 @@ class Transaction extends Model
      */
     public function payee(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'payee_id');
+        return $this->belongsTo(Account::class, 'payee_id');
     }
 }
