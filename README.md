@@ -2,7 +2,6 @@
 
 Bem-vindo ao meu teste para Dev. Back-End para **PP**.
 
----
 ## Installation
 
 Tentei facilitar ao máximo a montagem e utilização do teste, segue o breve tutorial:
@@ -15,10 +14,22 @@ Tentei facilitar ao máximo a montagem e utilização do teste, segue o breve tu
 
 1. Executar comando `docker compose up -d`
 
-### Insomnia Collections
+---
 
-### Para testes
-#### Geradores 4-Devs
+### Routes
+
+- [Account](./.docs/routes/account.md)
+- [Company](./.docs/routes/company.md)
+- [Person](./.docs/routes/person.md)
+- [Transaction](./.docs/routes/transaction.md)
+- [User](./.docs/routes/user.md)
+
+Insomnia collection example:
+
+- [Insomnia Collection](./.docs/routes/insomnia/insomnia_collection.json)
+
+
+### Geradores 4-Devs
 - [Gerador de nome](https://www.4devs.com.br/gerador_de_nomes)
 - [Gerador de cpf](https://www.4devs.com.br/gerador_de_cpf)
 - [Gerador de cnpj](https://www.4devs.com.br/gerador_de_cnpj)
