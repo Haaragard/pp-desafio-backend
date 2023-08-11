@@ -26,4 +26,20 @@ class TransactionService implements TransactionServiceContract
             $amount
         );
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function approve(Transaction $transaction): bool
+    {
+        return $this->repository->approve($transaction);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function reprove(Transaction $transaction): bool
+    {
+        return $this->repository->reprove($transaction);
+    }
 }
