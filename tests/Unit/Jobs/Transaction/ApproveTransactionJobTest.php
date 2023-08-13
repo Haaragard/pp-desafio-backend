@@ -2,6 +2,8 @@
 
 namespace Tests\Unit\Jobs\Transaction;
 
+use App\Events\TransactionApproved;
+use App\Events\TransactionReproved;
 use App\Jobs\ApproveTransactionJob;
 use App\Models\Account;
 use App\Models\Company;
@@ -11,6 +13,7 @@ use App\Models\User;
 use App\Services\Contracts\MockyServiceContract;
 use App\Services\MockyService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Queue;
 use PHPUnit\Framework\MockObject\MockObject;
 use Tests\TestCase;
@@ -26,6 +29,7 @@ class ApproveTransactionJobTest extends TestCase
     {
         //Arrange
         Queue::fake();
+        Event::fake([TransactionApproved::class]);
         $this->mockMockyService();
         $mockyService = app(MockyServiceContract::class);
 
@@ -47,15 +51,14 @@ class ApproveTransactionJobTest extends TestCase
         $job = new ApproveTransactionJob($transaction);
         $job->handle($mockyService);
 
-        $secondUserBalance += $amountToTransfer;
-
         //Assert
+        Event::assertDispatched(TransactionApproved::class);
+
         $this->assertDatabaseHas(Transaction::class, [
             'id' => $transaction->id,
             'payer_id' => $userPerson->account->id,
             'payee_id' => $secondUserPerson->account->id,
             'amount' => ($amountToTransfer * 100),
-            'approved_at' => now(),
         ]);
 
         $this->assertDatabaseHas(Account::class, [
@@ -76,6 +79,7 @@ class ApproveTransactionJobTest extends TestCase
     {
         //Arrange
         Queue::fake();
+        Event::fake([TransactionApproved::class]);
         $this->mockMockyService();
         $mockyService = app(MockyServiceContract::class);
 
@@ -97,15 +101,14 @@ class ApproveTransactionJobTest extends TestCase
         $job = new ApproveTransactionJob($transaction);
         $job->handle($mockyService);
 
-        $secondUserBalance += $amountToTransfer;
-
         //Assert
+        Event::assertDispatched(TransactionApproved::class);
+
         $this->assertDatabaseHas(Transaction::class, [
             'id' => $transaction->id,
             'payer_id' => $userPerson->account->id,
             'payee_id' => $secondUserPerson->account->id,
             'amount' => ($amountToTransfer * 100),
-            'approved_at' => now(),
         ]);
 
         $this->assertDatabaseHas(Account::class, [
@@ -126,6 +129,7 @@ class ApproveTransactionJobTest extends TestCase
     {
         //Arrange
         Queue::fake();
+        Event::fake([TransactionReproved::class]);
         $this->mockMockyService(false);
         $mockyService = app(MockyServiceContract::class);
 
@@ -147,15 +151,14 @@ class ApproveTransactionJobTest extends TestCase
         $job = new ApproveTransactionJob($transaction);
         $job->handle($mockyService);
 
-        $userBalance += $amountToTransfer;
-
         //Assert
+        Event::assertDispatched(TransactionReproved::class);
+
         $this->assertDatabaseHas(Transaction::class, [
             'id' => $transaction->id,
             'payer_id' => $userPerson->account->id,
             'payee_id' => $secondUserPerson->account->id,
             'amount' => ($amountToTransfer * 100),
-            'reproved_at' => now(),
         ]);
 
         $this->assertDatabaseHas(Account::class, [
@@ -176,6 +179,7 @@ class ApproveTransactionJobTest extends TestCase
     {
         //Arrange
         Queue::fake();
+        Event::fake([TransactionReproved::class]);
         $this->mockMockyService(false);
         $mockyService = app(MockyServiceContract::class);
 
@@ -197,15 +201,14 @@ class ApproveTransactionJobTest extends TestCase
         $job = new ApproveTransactionJob($transaction);
         $job->handle($mockyService);
 
-        $userBalance += $amountToTransfer;
-
         //Assert
+        Event::assertDispatched(TransactionReproved::class);
+
         $this->assertDatabaseHas(Transaction::class, [
             'id' => $transaction->id,
             'payer_id' => $userPerson->account->id,
             'payee_id' => $secondUserPerson->account->id,
             'amount' => ($amountToTransfer * 100),
-            'reproved_at' => now(),
         ]);
 
         $this->assertDatabaseHas(Account::class, [
@@ -218,85 +221,6 @@ class ApproveTransactionJobTest extends TestCase
             'balance' => ($secondUserBalance * 100),
         ]);
     }
-
-    // /**
-    //  * @test
-    //  */
-    // public function test_can_create_transaction_from_person_to_company(): void
-    // {
-    //     //Arrange
-    //     $userPerson = $this->createPersonUser(1000);
-    //     $userCompanyBalance = 1000;
-    //     $userCompany = $this->createPersonUser($userCompanyBalance);
-    //     $amountToTransfer = 100;
-    //     $payload = $this->createTransferenceData($userCompany, $amountToTransfer);
-
-    //     //Act
-    //     $this->actingAs($userPerson);
-    //     $response = $this->postJson(route(self::ROUTE), $payload);
-
-    //     //Assert
-    //     $response->assertStatus(Response::HTTP_CREATED);
-    //     $response->assertJsonStructure(['token']);
-    // }
-
-    // /**
-    //  * @test
-    //  */
-    // public function test_can_create_new_token_for_existing_company_user(): void
-    // {
-    //     //Arrange
-    //     $user = $this->createCompanyUser();
-    //     $payload = $this->createTransferenceData($user);
-
-    //     //Act
-    //     $response = $this->postJson(route(self::ROUTE), $payload);
-
-    //     //Assert
-    //     $response->assertStatus(Response::HTTP_CREATED);
-    //     $response->assertJsonStructure(['token']);
-    // }
-
-    // /**
-    //  * @test
-    //  */
-    // public function test_can_not_create_new_token_for_not_matching_password(): void
-    // {
-    //     //Arrange
-    //     $user = $this->createPersonUser();
-    //     $payload = $this->createTransferenceData($user);
-    //     $payload['password'] = 'not_matching_password';
-
-    //     //Act
-    //     $response = $this->postJson(route(self::ROUTE), $payload);
-
-    //     //Assert
-    //     $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
-    //     $response->assertJsonFragment(['message' => 'Credentials does not match.']);
-    //     $response->assertJsonStructure(['message']);
-    // }
-
-    // /**
-    //  * @test
-    //  */
-    // public function test_can_not_create_new_token_for_non_existent_user_with_given_email(): void
-    // {
-    //     //Arrange
-    //     $user = $this->createPersonUser();
-    //     $payload = $this->createTransferenceData($user);
-    //     $payload['email'] = 'non_existent_email@test.test';
-
-    //     //Act
-    //     $response = $this->postJson(route(self::ROUTE), $payload);
-
-    //     //Assert
-    //     $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
-    //     $response->assertJsonFragment(['message' => 'The selected email is invalid.']);
-    //     $response->assertJsonStructure([
-    //         'message',
-    //         'errors' => ['email'],
-    //     ]);
-    // }
 
     /**
      * @param int $balance
