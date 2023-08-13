@@ -111,6 +111,7 @@ class LoginTest extends TestCase
     }
 
     /**
+     * @param User $user
      * @return array
      */
     private function createLoginData(User $user): array
