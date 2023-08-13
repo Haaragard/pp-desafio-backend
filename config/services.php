@@ -39,4 +39,15 @@ return [
             ],
         ],
     ],
+
+    'wiremock' => [
+        'domain' => env('WIREMOCK_DOMAIN', 'https://haaragard.wiremockapi.cloud/'),
+        'token' => env('WIREMOCK_TOKEN', 'token'),
+        'uri' => [
+            'notify' => [
+                'email' => 'email/notify',
+                'sms' => 'sms/notify',
+            ],
+        ],
+    ],
 ];

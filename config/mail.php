@@ -85,6 +85,14 @@ return [
                 'log',
             ],
         ],
+
+        'wiremock-email' => [
+            'transport' => 'wiremock-email',
+        ],
+
+        'wiremock-sms' => [
+            'transport' => 'wiremock-sms',
+        ],
     ],
 
     /*

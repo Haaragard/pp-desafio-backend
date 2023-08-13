@@ -8,7 +8,8 @@ use App\Services\{
     MockyService,
     PersonService,
     TransactionService,
-    UserService
+    UserService,
+    WiremockService
 };
 use App\Services\Contracts\{
     AccountServiceContract,
@@ -16,7 +17,8 @@ use App\Services\Contracts\{
     MockyServiceContract,
     PersonServiceContract,
     TransactionServiceContract,
-    UserServiceContract
+    UserServiceContract,
+    WiremockServiceContract
 };
 use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider as BaseProvider;
@@ -57,6 +59,11 @@ class ServiceProvider extends BaseProvider implements DeferrableProvider
             MockyServiceContract::class,
             MockyService::class
         );
+
+        $this->app->bind(
+            WiremockServiceContract::class,
+            WiremockService::class
+        );
     }
 
     /**
@@ -73,6 +80,7 @@ class ServiceProvider extends BaseProvider implements DeferrableProvider
             AccountServiceContract::class,
             TransactionServiceContract::class,
             MockyServiceContract::class,
+            WiremockServiceContract::class,
         ];
     }
 }
