@@ -20,4 +20,15 @@ class AccountFactory extends Factory
             'balance' => fake()->numberBetween(0, 999999),
         ];
     }
+
+    public function withBalance(int $balance = 0): static
+    {
+        $balance *= 100;
+
+        return $this->state(function ($attributes = []) use (&$balance) {
+            return [
+                'balance' => $balance,
+            ];
+        });
+    }
 }
