@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit\Jobs\Transaction;
+namespace Tests\Unit\Listeners\Transaction;
 
 use App\Events\TransactionApproved;
 use App\Listeners\ApproveTransaction;
