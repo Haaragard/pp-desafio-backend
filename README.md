@@ -16,8 +16,9 @@ Tentei facilitar ao máximo a montagem e utilização do teste, segue o breve tu
 2. Executar comando `cp .env.example .env` para criar arquivo **.env**
 3. Executar comando `docker compose up -d` para buildar e rodar containeres
 4. Executar comando `docker exec -u sail -it app bash` para acessar o container **app** como usuário **sail**
-5. Executar comando `php artisan key:generate` para gerar chave
-6. Executar comando `php artisan migrate` para aplicar migrations do banco de dados
+5. Executar comando `composer install` para instalar dependências
+6. Executar comando `php artisan key:generate` para gerar chave
+7. Executar comando `php artisan migrate` para aplicar migrations do banco de dados
 
 ### Testes
 
