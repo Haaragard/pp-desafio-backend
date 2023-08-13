@@ -10,8 +10,6 @@ fi
 
 chmod -R ugo+rw /.composer
 
-exec composer install
-
 if [ $# -gt 0 ]; then
     exec gosu $WWWUSER "$@"
 else
