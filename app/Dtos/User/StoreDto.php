@@ -7,27 +7,23 @@ use Illuminate\Validation\Rules\Password;
 
 class StoreDto extends BaseDto
 {
-    /**
-     * @var array
-     */
-    protected static array $rules = [
-        'name' => ['string', 'max:255'],
-        'email' => [
-            'string',
-            'email',
-            'unique:users,email',
-        ],
-        'phone' => [
-            'numeric',
-            'digits:11',
-            'unique:users,phone',
-        ],
-        'password' => Password::min(8)
-            ->letters()
-            ->mixedCase()
-            ->numbers()
-            ->symbols(),
-    ];
+    public static function rules(): array
+    {
+        return [
+            'name' => ['string', 'max:255'],
+            'email' => [
+                'string',
+                'email',
+                'unique:users,email',
+            ],
+            'phone' => [
+                'numeric',
+                'digits:11',
+                'unique:users,phone',
+            ],
+            'password' => Password::min(8),
+        ];
+    }
 
     /**
      * @var array
