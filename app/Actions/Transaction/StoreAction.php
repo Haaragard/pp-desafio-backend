@@ -35,17 +35,16 @@ class StoreAction
     public function execute(StoreDto $dto): Transaction
     {
         $account = $this->getAccount();
-
         $targetAccount = $this->findAccount($dto->payee);
 
         $transaction = DB::transaction(function () use (&$account, &$targetAccount, &$dto) {
             $this->withdraw($dto);
             $transaction = $this->createTransaction($account, $targetAccount, $dto->amount);
 
+            ApproveTransactionJob::dispatch($transaction);
+
             return $transaction;
         });
-
-        ApproveTransactionJob::dispatch($transaction);
 
         return $transaction;
     }
