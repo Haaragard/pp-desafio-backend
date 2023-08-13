@@ -6,7 +6,6 @@ use App\Events\TransactionApproved;
 use App\Events\TransactionReproved;
 use App\Models\Transaction;
 use App\Services\Contracts\MockyServiceContract;
-use Exception;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -43,10 +42,8 @@ class ApproveTransactionJob implements ShouldQueue
             }
 
             $this->reprove();
-        } catch (Exception $e) {
+        } catch (\Throwable) {
             $this->reprove();
-
-            throw $e;
         }
     }
 
@@ -64,6 +61,5 @@ class ApproveTransactionJob implements ShouldQueue
     private function reprove(): void
     {
         event(new TransactionReproved($this->transaction));
-
     }
 }
